@@ -1,4 +1,4 @@
-ruby-para-impacientes
+Taller de git
 =====================
 
-Tutorial muy básico para empezar a usar Ruby
+Tutorial de git para la Osl
