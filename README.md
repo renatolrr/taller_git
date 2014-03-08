@@ -1,6 +1,7 @@
-ruby-para-impacientes
-=====================
+Taller de Gi
 
-Tutorial muy básico para empezar a usar Ruby. Versión para publicar en
+====================
+
+Taller de git. Versión para publicar en
 gh-pages.
 
