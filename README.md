@@ -1,7 +1,7 @@
-Taller de Gi
+Taller de Git en entornos distribuidos.
 
 ====================
 
-Taller de git. Versión para publicar en
+Taller de git en entornos distribuidos. Versión para publicar en
 gh-pages.
 
