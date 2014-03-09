@@ -1,648 +1,92 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+<!DOCTYPE html>
+<html>
+<head>
     <meta http-equiv="Content-Language" content="es">
     <meta name="generator" content="Emacs y GitHub">
-    <title>Tutorial: Ruby para impacientes</title>
-    <meta name="AUTHOR" content="Juan Julián Merelo Guervós">
-    <meta name="keywords" content="scripting, programación, Ruby,
-				   Perl, por supuesto, manual">
-    <meta name="description" content="Introducción rápida al lenguaje Ruby">
-    <link rel="stylesheet" type="text/css" href="ruby.css" title="normal">
-    <link rel="stylesheet" type="text/css" href="highlight.css" title="normal">
+    <title>Tutorial: Git en entornos distribuidos</title>
+    <meta name="AUTHOR" content="Renato Ramirez">
+    <meta name="keywords" content="git, programaciÃ³n, Ruby, manual">
+    <meta name="description" content="Git en entornos distribuidos">
+   
+<link rel="stylesheet" type="text/css" href="ruby.css" title="normal">
+   
+<link rel="stylesheet" type="text/css" href="highlight.css" title="normal">
   </head>
 <body>
 
-<a href="https://github.com/JJ/ruby-para-impacientes"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+<a href="https://github.com/renatolrr/taller_git/tree/gh-pages">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="data:image;base64,iVBORw0KGgoAAAANSUhEUgAAAJUAAACVCAYAAABRorhPAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAHplJREFUeNrsXXlUlde131wGGRyYcQBkUlGIGqMxmmqMZjJxSByS9jXJW/HG5q2+Jq/NUJK13nr/vVXN2LRdq00TeH0vzaBN0qZpkhq1jjFOOIHGERQQQRDBAMp0eft3ON/t4eO7TPdyucDZa33rgztw7+X73d/+nb332duvtbWVrMzPz8/5ozzb5M/+8mf/3xH9V9yECS/EzZtHtYWFVL5tm/PBPT172kZMmkTRt99O1y9dopKtW8+82dj42D6iK3xXkzyaTUcLHw55tMqDWl39g7S5NL9egso4An5D9J8x0dHPJj3yCDVUVlL5P/5BDRUV7cDSX8AKGD6coubMaXtfhw+feZPoiYNEFQqwzADTwPKA2dz9Az8hWn+5puZXlXv30vCkJIq9445/Xg2TtXbxu6etubaWvjt5ksKnTaPkZcsm/Dwq6n9nEMXxXcP4CJJHIPAnD4OFjS+Qn/yC+Wmo9A1T+Sn/cIOpAuUR9AZRVlxY2E8SH3yQrpeVUeXXX1PLjRuWbOTXxe+ettDERAqfPp1usCssPXDgLL/XJw8TXea7GuXRJM+asbwEKvW625TD+HY7gfUa0QsTp0378fgVK6j2wgUq/ugjarp2rd/1FSxw5EiKXbSImmpqqPzIkYJ1VVVrDre5wgYNrP51f63K4TAfzxH98tujR986/fbb1NrUJNhBdXPdPfeVK7x24gSFjBtHcTffnPIzonf43cVKVzjM+GJoV+hdplLFuqULlMew9UQ/S0tIWDv+4Yep8coVKv3iC7px+bJPMJZt2DCKYd2H91Wel3fu1cbGJ4/80xU2aMbqX6YyjhZ5OJfnWUS/OldWln1p82YKHDWKIm+91WcYy9HQQLVnz1L4zTdT0r33pmaNHJktGStIM5Z3maortgowMZZwKb8geiZp+HB74sqVYllfsWsXNbPGIh9grOC4OAqfMYNu8KKi7PDhs68TrdWM1X8hBbOmMjOVcTEaXyL69fna2uzqY8coauZMiueVoS04uN9DDbAb5eV09eBBESRNWrw47aXoaM1Y/cBUZhIxDn9Xq0GFsZ5OCQ+3j128mK5fvEiXd+70CX3lZ7NRWGoqRTBj4X2V7N6tGasfQOUWsCZPmGCHeG9glij+9FNqrKjod2DB/ENCKGbBAmq6epXK8/PPvVxbq8V7P7g/shDrDpMLbFIuSgNc4clz57KLPvqIX9VGEdOm+YRwh7Vcv051BQU0MjOTEubPT30hOPgd7Qq9y1Tuu8KICLsRbkASGue+YqyeADIIK9XZs6nh8mUqO3JEu0IvMpXbjFV47VrOlQMHaMTEiTT6rruoVQLYk4zVavEGzdFac46ysaZGBEhHTZ1KKUuXpr0UGanFu5eZyi3GWseMNT401B6/fLnQWAg3OJqaPMJY6idymM6tFvERao8IkRhHNgDivXT/fs1Y3gYVnq98M3sMrIyMDHviqlXiAhZ//DE1slh2J/lsRZ8O5WymaZViVIAFjBhBsQsXton3Y8cK1lVX2zWw+t79qcDqlSt8kV3h8ePHs8/94Q+CpVCi0p24VWs3AWUVRFMRYBxWblaUzZw6RWEpKTRm1qyU52y2t7Ur9CJTKc/pNWOljRljF4V+LNrLNm3qUa6wK0A5FPCk/+hHFHPLLbT7qafaVRuq5Rfq30a4IXrePFF4yIx19rWWFu0KvcFUnmCsgsrKnLLt2yk4JkZUa/ZEuLeawGVmKOMFJzCg5r/1Fk3m8+18VkHnajGAcEPtmTMUcfPNlPzAA2kvhodr8e5NpvIEY40PC7MnrlghmAqFfnBD3RXs6srO7OoApIUMJFhNQQGNYrd24ve/pz3MWGY0WOm2kLFjRRIaucJLublavHuLqTzBWBfq6rKv5uVRzNy5lLh6NQWEhXWLqVpNTKUeKqC+YhC9N3MmXc7NpSl8+9SsrA5lF1aMdb20lK7s2UNhycmobtC5Qm8zlScYKzUmxj7mnnvoenFxu1yheQXYKn9WkauiFhrqTgmoC1u20Ia77xZvIDQigu7m26GtHLzCC1D0lZ8LtjJyhZGzZgmQFW/frhnL26ByF1jpycn2RETeKyvp4mefiUi3GVhmtlJ11EQG1AIJqGp2eeHs8o6wy9uiiPRA5fDvwgU66X3YMIpdsIAaq6sh3s+9cv26zhX2tfvzlCs8VVSUAzD5BQUJodyTUMNkBVAA0bvs8srY5U3n2xMQxe8iym7lEp3aDYV+587RqMxMSly0KPXnoaE6V+hNpvIEYyWPHNlW3cDLerhCBCSpE6aKuOUWWnrwoLh9GwPqKLMTkBvELm88AwpuEODC8yHW4f4ClauvslVnEfxhkZHCFWJRoQv9+gFU7gBrvc329E3Tp9vH3n8/1RUW0oUNG/gSNXdgKYcCLIQPAhhEuevXt7uiiQyq5Rs3UjDfB7vBgPqUddZVZjHjDdhcaCvLVeHo0c5dOqV79xb8orJyyEfevQoqdxkrKSzMHr9smdi/B8Yih8Mp1B2dxKmMcxQz2KrNmwWgdrz4otBZ97KLLGbm2sRMGOCCrToDl43Fe2hSkrPQ7+I33wx5xvI6qNwF1pT0dPv41atFvKj4k09EBN6sqdRYVatyJZcxoMBUm9glQrDjvn9jbQSQvcWuzN8CVGpBvp+FiDfOCH3E3Hln277Co0cL1l+7NmQZy9YfL+qOeD9x8mR24XvvUWtLi8gVWoUajAuvujKbdH3QU0cloO5jlsKK8NSf/iRePJKZzMYAs2qwYIkAxZrr6kTkfcSECTRu7tyU5wMDh6x47xemcltjIY4VGysYq6GqisoYKGpTELO+ckiQ/IBZCWJ9MzMVVoAQ69BUv0PsicH1MDMZou0f8ErRAKSIZ7EGy4W7ZN3lb8FaqvmHhopuM9g9NFTFe7+Cyh1gvRIY+MyUzMw1Y1lkf8dgQdkMmYKiDsX94cqFY1XIwBkmRTpCDF8ywPCYf5FaywiSfs4aC29gBd8ey887yey2V6Z0bCaKMRt6N0C8o6K1ZNeugnVXrw4pV9jvoHKXsVDol/DQQ85cYUt9vUt9hcOfgZPMDHedGepbdnuoWHhEAmobs1EIn5OYxTYyWHF7HN9/nAH1NQMq0IXfsrKQ+HgRW0N/rEsHDw4pxvIJULkLrIypU0USur64mIoZKI2yKYjDAlgtptXgCgmovzNoDjF4YPgdzDWa78/j23ZIQKk9h7oCFSwwPFwU+mEDbdmhQwW/qKoaEoxl85U30lvxnoVCv2PHss+glKWhQZQBG0FRc6mwup16OANniYxXIcl8jMFjMwEKgh76ayTrra4KA60MYLp2/DgFjxlDcdOnpzxLNCQK/XyGqTzBWJMSE0WusMFoClJe3g6lZvGOyHukBA8QG8iAekQCygiMAmQNfP4bu8NqGSBVE8/mb6XVf83ZFIQXFZfz8s690tAwqHOFPgcqd4D1sr//MxlTpqxBshf7+C5+/nm7v+uwEPCq1lohNRQEPICFUEMF/4y0UBWfryqgslkERzsD1nBeYSKOJTbS7tgxqONYPgkqdxlLNAVZtUpUN1zevZuaqqvbMRZZ+NW72BWmsYCHGwRD3ZqVRTkMhFoGZ3eCombWsvrvDYuJoYiZMwd9UxCfBZW7wJo6Y4Z97JIlVH/+vMgVorKATKJNBRaYCrVXB9avp+/LZPSHDACbKYRg6yTS7ira3g5YsbEUh1wh663SffsGZa7Q5suId0e8Hzt0KPvUm29SS1MTRc+e3U5Qq+g0Iu+oVMhjQEWxKEdcqmTLFucqz09xn0a8S426m696ZyIe7Fl14EBbWic9fVCKd58GlbvAKqypyYYWwm6YtLVrKYjdj9k9OZvCK1exkp9znvWUv/IPciji/gHWXtg40Uzt0zlqXZbLz+NwiKZrpZ99JvqQjps7Ny1rxIhBVZrs86ByF1gnT5/OLmKA4E9Eyn2F6oc3hxqus4baxitIgNFmAhVWistlRH7cXXfRTay7mqhjfrCzWnfDxC4dBtfIyZMpft68lMHUFMSnNZXHVoUo9IuMdDYFKUNTEHZD5pIZ8wrRYQqUGoDaz24SxX5YKW596in6lsW9GhxVk9hdrQrBVpG33TaomoIMCKZyl7F+jo5+NTU5V/bvF0v70QsXOp9sc4FQlRJiFUAhUIp0DlI8sJnMVihdVjWWowcaC4IdTUFQcZGybNmgaAoyoJjKE4yVGBJiT3jwQbGsr9izR6wKzTud1UK/EBbuy3k1CEBtkakc5At/wCAzAqQonznI7LWXwWbFWF2GG/jjIAktcoWlpQO+KciABJW7wMrIzBRxLJErRFOQ6up2F1qNvOPqZTIb1TF4EHmHrnpY5gs/ZneKioZnq6raSmgiIzvkCM2lMq7cIMzZFMQYIDBAm4IMKPfnKVd4PD8/+1xOTltTkKlTO+7vU/45OI4xC6H0BTrKABRKZuAC42RK5zyDy9VYru7212qpqxOzdMKSkmjMzJkpz/r5Dchww4AFlbvAOl1UlF22dasIESQ9/jgFx8a2u+g2E7Bw9ZC6MRLQYK2x/PvKjRvF4/Yw8EawG5zBrIbSGlcVo9RFuAGdZoo++EC0sBwzY0baQKwgHbDuzxOu8FUU+mVkrIlbsEDs40PsSN1IYV4FNsk4VWlubjs3+DmDDM9ZuG6ds9AP2+q/uPtu5+5ntVymMxdoGLbXxyJXyKvUkp07B5QrHBSgcldjIVeYgKYg5eVUyeK9+bvvLMdaGLQXitJjFu+GG6xn4BiMtZcZC0nopfw76rDOyHCDVbsi6gJgKJmJMJqCHDo0YMT7gHZ/Hgs3YIBAfj5Fz5lDAJctNLTDJgo14l5fUECHGDxYDeYzaBYxQ8GMHdBGuTLq4S0nQ5F1T1KzYSvalX37aHha2oBqCjJomMoTjJUaHW0fbTQF2bWr3Q5oq3IZ4/gp/w9QJoOtX0YJMmqwNs6cKSL0/i7iX90pm3E2BeG/VV9Sgpp3n2esQQcqd4GVnpraVujHrrCENRYGCJjr3c3tHtfKkAJaFOGFVjKwwGAnZTWpFaBc9Rt15Q7FAAEU+vHroNDv5fp6ny30G5SgcgdYr9hsYsNqzPz5VMfiHZPAzIylAgvnSbIZCLZ3fcmAhKayqrWymsRpxV6uwIUW4dH8vuAWi7dt81lgDVpQuctYmKWTsHq1YKpyNAVhNrIClnFO4sdGs9tDVN0qNYN9hojEA3ClW7a0c4mdtTAyXwXotIhZs3w6VzioQeUWY/n7P3PT9Olrxtx3nwg3FGF1J3s3kEXIwXzVjN/RJGQuC/lMZjPD8uUOnQBlAWBTzl0V+qFVpGgKUl2N3g0+V+g3aFZ/nl4VvtDS8qu83NzsU7/8pcjNxbLb8QsIaBdtV1eEVmkZmAGocmaoz9g1olwZv0fIQj+rrfVdlc5gLyH2OPoFBlJ0WprPFfoNelC5BSzZgxTzCmNZJKc88QQNi4pq3/VFcV9mNxbPLs8AFDannuAVIgKnJO/Di2KMSlNPo+/8cbCxo3zTJlH3Hj9vnk91TR4SoHIXWCeOH88ufPddkSscpRT6qdFxK+EdI/OCu1hnYUc0SmgWyJgWAIZepA/yQiDJIq1jFccyx7Oa6+vpu9OnRRxr7OzZPtMUZMiAyl1gnSooyMZewvCMDEp69FFnrtDPxQoPh9HxbyKDZhIfP5Bpna0MstlZWTRN6qxbZL6wpYtAaYc3zx/n2qlTVPzhhyJvGJuZmeoLkykGvVD3pHh/TeYK4bLQ0a9ENgVRV3pquAHIRC17hiLS/8GAQv3VDL4NEXgETQEwgO391NR2wVKrchlXXf3Cxo8XZTO+0BRkSILKrVUhCv2Cg0U9FpqCXMEAgbo654qQFDdmCHEkn8cyEFEqM4sBNF0C6kPWWWCz2/i2eewWP+Pfy2S4obPYlQo21dWExseLbf+IY/XnAIEhCyp3gYWmIMgT1hcVUfHGjdRUW+v8u66mTkxn8NzO4DGEO6Lw6DLz2MGDYgLFH5mpkFe0uQCNVfDUHH5AUxBjXyEDt1+aggwpTeVJjSWagvz2t+RobBT9Ps3/VDXkYKDy6Pr1orHtJwyoZgYUmoSsZp0FQOH2awwoc2DVVTc/V4lpNAWpyc9v27Q6bVq/hBuGNFN5grEmjR9vT8T0r8pKKv3b30Sk2yry3mICBpqBLJcN1RAM3f7UU5buLl5G4lH5oO5H9O+CsYymIGJeIZqC3LjhtZSOBpWbwHrV3/+ZKZMnr0EcC30XLn35pWWu0MxAs9gNwh2ekIAii3TMvexWkd5RrYBBhQZsLQwWqzCG6ioRasAUe283BdGg8hBjYYBAgtEUBLnC6uouZzhjM+phdnvmKapBCouhhAZMhpxhhpxWcYSfc4hXka4qINRVomgKwn8HBYjeagqiQeUpxrLZns7EAIElS0S0u2jDBmqVM6HVcIMrgBlXMkABFEqS0XsUWssQ6AiWwh2+GxnZIRntKm8o9BUi9xgg4IWmIENaqHtSvD/vcPw6D01B3nhDtOOOnjtX5AzJRdTdFRDARgAUymg+QqM1Pqtv5Cy7P1RCmMHYWTtu0RRk3762zskTJ/a5eNdM1QeucPKkSXbMKoTLufjnPwsR79cJUtXarCeqqoQo/5gBhT2F6rffXN6MGi4U7aEddwB1XpsFCwgJaQuQotAvP7/PNJZmqj4IN3x76lQ23B8Sv8YAgVYTY1mldbDSA6Dg9gxA4Xm4zcxMCKZiuz16ahmg7Iqxmo2mIOnpbQMEgoL6JFeoQdVXwDpzJrvkL38R1ZoJjzxCwdHRlj2yVHaplBUMAJEBRLjCRw8eFDrKoQCqkEH3NTMUpoSZ5/CoSWlzxQP2FaKDs8gVTpmS2heuUIOqD4FVWFOTU8laBnv40O/Typ+aE9BYDSIYijr3+evWOaPt2B2NF0QpDYY2oU5rHz+2UO6MbnFxWCWjsQUNO6GR0umLpiBaU3lBYzkHCJSVUeXu3c5WkVYTv5plDAs7nQ37Sg5oQlUDpn4hvYOxvcghjparxO3KtFW1mrQznRWWmNg2bBxNQQ4c8Fi4QTOVFxjrQn29KPSLmTePxj/2GAWOGtWubEZdEeLYz24tOzJSgGWL7PGuAup9BhSGN+G2OOkW/ZVBTXP5caP49s5qtGB1RUVUsW2bmE6RuHBh2osRER5hLA0qLwErPy8v+9w774hc4Sh2O8YfsRocgAO5QbAPIu7TTYCqKiigdF5dGhYnAYQXvYMfhyn2izZuFEDrCljNtbWiPxaANXrGDI+EG7T787IrnBQfb09AR7+qKrr0xRciV+gwuUIVoaJnA+sqAAqVDVcYUN9nTTWGb0evLKPnO8ag3M+AMiaD/QXgk1O/zMMxreq0nAMErlwRucJXGxt7nSvUoPIysFDol4FcIQt35ArRFMRVQxDj6mFf4SVs7eIDIh0DmQ4zoD6XE8DwfABqhgQUwIe0Dl44DFu6WOhXm8b5Wu2ODkNn5oULBdCLt2/vdRxLg6qfGCsZo3tXrRJzCiHeUbJiHnVi3gmNUAKmUiCG9QEDx1jdGYCCfSFFPd6EWlrzpTIGpbPRcsFxcRQ+Y4ZbAwS0puqvcENdXXYNi/eoW2+leF4Z2oKDLUW7ispmWfOOcuRkBhge94DCUDjQzggxLZTWrJQ5RCLX7bjNGgtZgKsHDoj4WtLixb1qCqKZqp8ZKzUiwj76vvvoxsWLorpBHQRgNVJuIgMolUU69hCiinSaBNS7zES4Eo/JXqTIGUJ34b4/S5Yy3oB5K1mHz2OziYa7qG7AsPGeNgXRoPIBYE1GUxAU+rGWKfn0U2dTELPGUqPm07KyRAAUoEGt+0UGjdh+zwz2uNLkVoh7vi9IeXErUFnmCpk9xbBxFPrl5597uba2W+Jduz8fcIWnCguzSz75hK+0P0XIcINVDEtF5inWTcWsrVCaXClXeWLes9xXCIO4R/gB7rCFOvZ/MIshc0qn5cYN0aRkZGYmJdxxR+oLISHdyhVqpvIRxnoV4j08XLQxwrL+8vbt4uyq/srcIwt1WKvkrEIw1BbZ6x3uEBrsExliMDNVZ9PAjA+CYG3k7NndbgqimcpHGOt5dPT77rucqoMHaUR6Oo1mEKAeS73Q/hboDJBhg9UKoN6TW+wflbdBX13lo4Wsm7aZt9qbzyjuu5afT6NuuolSli415wpVzyrekgaVDwHrOTQFkYV+oinIggVkCwzssAvaHH0Pk1UNhobCFrDVGzcKoY54FjQX+sBPkY1B1Befw6vHVFk+01kfB9EUZPdu0RQkasIENfI+zASuAO3+fNQVZmRkiJp3sfpivYUIvIpSs3i3MbDQ4BYBUmyjv4O1VaGMZ8EQdrhPNmZ7f+ZMIb4Xyd3T0GSbEPfi21Q2JCvxPnx42wCB6moqP3asYH119ZrDba6wQX5BGjWofBhYk5KS7NilU3/hgtBY5tiSOfJu7Ij+VxbXCHi+ERkpGoPczMBZLHOHYC0kqgGwqXy7qINXWnN31oBNfiARw4qaM0eMPCnasuXs6w7HkwyscoNxNah8HFhpo0e3iXdmqvKvvhJb7cnkU81aaQlrKVQx7JC17HfK0AO0FlaES2SOEG4SAr6V7zMv4fxdMJVh/sHBolUk6t8h3t9wONYcksDSmsrHxXvBlSs5CIpiRwzYwYxOq5ADNkYwgwgXqAIKsSwj6Wy8GWz5aqXOB19aGcINtadPi0K/5CVL0rLCw/9nJhGmdAZqphoo4YawMPu4FSvExlAxQED2bnBYBEgNdC6TaZoNElD3yZQO2Ookrw7nyG4z/5eaSjdYawVRx2qGrgytIsPlAIGy3NwzvyF6LEBfau8ylgRWuxijPDe7eh4Y69W6OhqRn28f9+CD4kKWMCia+DYrV2P88U3sNlF5UKEwFAAF8d4gdziDzRDHKmdQ9cagqzBlFT1IE6OiJjyfm/tHzVQDTWPFxtoRw0K3mcpduzrsblZzhYZfRUrnezLSDqGOiV+Ivv+IBT2Y6j3ZFyuQrPuWdvl5kCtMSxNdk7Fa1aAagMBKT05uK/SrqKCLSlOQ7gALTdYg0G+Vrm8P66/89evbBVNtPQSVYSj0Q2xNg2oAAus1f/9nMtLT12D1VX/+vGgKQp0wlgGupayx1IYfmK+zX25EDexOOKEbBsbSoBrAjJUycqQo9MOyvoJdYaOst7IS78YxWQ5kQveYWtlgzRyf6u74OJefSYNqADOWzfb0TdOn28fcf79grOING6hFNgVxUOdNaa3SPn5k3TlGg2qoAUvOKxy3dGlbfm7nTnI4HE5gtZJ1aYt5pK+rCoXemA5+DvAA6XNyXmHV4cNiX2Gy3U7DoqOdF9cKmebxJa6GW2pQDXFgfXvyZPaF998nR3OzGDauXmCr2veuOiC7xbra/Q0uV5gaE9M2rxD797ZuFbt1uv26mqk0Y1kxVmF1dU7lN99QaGKimKfjqhmI1eGxL4VmqkEq3kND7eMeeqgtV/j11yKV4i3TTDVYxXt9fXZNXh5Ff+97lPjDH4o6c699GTRTDW7Gmjh2rB2VmvXFxVSxY4cGlTbPAGtSQoI9Xu7SMZqCaPenzS1XeKasLKd882YKHDmSImfN0kylzXOMlTx8eFtTEGYqiHdsvdJMpc29cENtrWgKgrqnscuWiVIVzVTa3Gas1+VO6DGLF1N9SYko9NNMpc0txnq2LUCafTU3l2Lmz6eUtWuduUINKm1uAevk2bPZqHOHhcumINr9afOIK0yJjBSlycgVolMxRp5optLmFmOJpiD794syYARJNVNp8xhjjQ8JEblC5wCBxkbNVNrcY6wL16+LcAPE+/jHHxcDvjWotLkNrOP5+dmFOTmCpdwR79r9aVfYwRWmjRljx+QvNAUp+/vfe5wr1EylGasDYxVUVuZgJTgsKoqibrtNM5U2zzFWEpqCrFzpzBVipJtmKm3uhRswQCAvT7BVPIMLM5g1U2nzCGOlRkfb4+65h66XlFDFzp0aVNo8A6xJKSltkffKSir99NNOd+lo96ddYbdc4ekLF3JK//pX0S0ZTc40U2nzGGMljxplj1+9uq0pyI4dzqYgmqk0Y/VevNfW5lQfOiRGi4xevJj8/P01U2lzm7GC3mDGSgwNfXLc8uUiVwjx3trSoplKW+8Z62dEbxbV179dfeSIaHudvGYNBUVFaVBpcxtYb5z69tu3Lrz7boemINr9aeupK2zXkeg3RD9NiI39sZErxAABDSptPQVWh/ZWbwUGPp+cmfnvcYsWiZaPGlTaegosqxZXtreIno8ODf2P+BUrNKi09RhY5rOzTWg2UVbCtGnPug2q/x6o/7hOfu/ufVY/9/S23jzGG+dHO45X9iPrgabtWq7/geglt0GlbXCTlgWwuuo926pBpa03wOqsGZ8GlbZeAYsswOQEjAaVtt7IUD/qpIe/BpU2j69vNKi0eQJcmqm09S3INKi0eR5hGlTaNKi0DVxQadOmQaVNg0qbBpU2bRpU2vrP/l+AAQBZTVVRokJ0LQAAAABJRU5ErkJgggAA" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" uri="https://github-camo.global.ssl.fastly.net/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67">
+</a>
 
 
-  <h1>Taller de la <a href="http://osl.ugr.es/">Oficina de Software Libre</a>:  Git</h1>
+ 
+<h1>Taller de la <a href="http://osl.ugr.es/">Oficina de Software Libre</a>:  Git en entornos distribuidos</h1>
 
 
-<div class="objetivos"> <ul>
+<div class="objetivos">
+<ul style="position: static; z-index: auto; ">
 	  
-	  <li>Conocer la historia y origenes de este lenguaje</li>
+	 
+<li>Apender en un entorno distribuido, tanto como colaborador y bien como integrador.</li>
 	  
-	  <li>Entender los conceptos principales detras del mismo</li> 
+	 
+<li>Entender los flujos de trabajo.</li>
 
-	  <li>Conocer y saber usar la sintaxis</li> 
+	 
+<li>Contribuir en un proyecto.</li>
 
-	  <li>Aprender las estructuras de datos y control principales</li>
-	  
-	  <li>Usar e instalar bibliotecas.</li>
-
-	  <li>Hacer un pequeño programa.</li>
+	 
+<li>Gestionar un proyecto.</li>
 
       </ul>
-</div>  
-
-
-<h2><a name="1:t1:intro">¿Ruby? Pero si es muy
-  fácil </a> <a href="#1:t1:intro" style="font-size:small">#</a></h2>
-
-
-  <p>Si es que os suena, posiblemente conozcáis <a href="http://www.ruby-lang.org/">Ruby</a>
-  por <a href="http://rubyonrails.org/">Ruby on Rails</a>, un entorno
-  web creado a mediados de la primera década del siglo que usa Ruby como lenguaje
-  subyacente; mucha gente llega a Ruby desde la derecha (el On Rails)
-  y se piensan que es como un lenguaje de macros que imita a Python o
-    a Perl o a ambos... pero no es así.</p>
-
-<p>El lenguaje Ruby lo
-  creó <a href="https://www.ruby-lang.org/en/about/">Matz, Yukihiro
-  Matsumoto</a>, con la intención de que fuera fácil de aprender y se
-  pareciera lo más posible a la forma en la que hablan las personas,
-  no a cómo las máquinas quieren que hablemos. Y tiene mérito que no
-  le haya salido mal del todo, porque las últimas dos veces que
-  dijeron eso salió el <a href="http://es.wikipedia.org/wiki/COBOL">COBOL</a> y el <a href="http://es.wikipedia.org/wiki/SQL">SQL</a>. Por otro lado, el nombre Ruby
-  puede ser un juego de palabras con las perlas de Perl, o quizás
-  no. El propio autor dice que es una mezcla de Python (que es
-  anterior, pero no mucho) y Perl con un poco de Lisp y Smalltalk
-  espolvoreado para que no falte de nada. </p>
-
-<p>¿Y qué es lo que sale? Pues un lenguaje interpretado, <a href='http://www.rubyfleebie.com/ruby-is-dynamically-and-strongly-typed/'>de tipado
-    dinámico y fuerte</a>,
-  orientado a objeto, reflexivo, que hasta no hace mucho no era
-  demasiado rápido pero que últimamente está experimentando un
-  incremento de rendimiento considerable. La versión estable actual es
-  la 2.1.1, aunque todavía se usan de forma extensa versiones
-  anteriores como la 1.9.3. Por supuesto que por lo que más se le sigue conociendo es
-  por Ruby on Rails, pero aplicaciones muy populares como Amarok o <a href="http://sketchup.com/">Sketchup</a> usan
-  este lenguaje. Y tú puedes tambien usarlo, si prestas atención y
-  ejecutas los ejemplos de este tutorial, ¿por qué no?</p>
-
-<p>Si bien es cierto que los puestos de trabajo de Ruby tiene menos
-  demanda que los de otros lenguajes como Python, Perl o Javascript,
-  también es cierto que hay una gran demanda de programadores senior
-  de Ruby, sobre todo Ruby on Rails y que en
-  el <a href='http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html'>ránking
-  TIOBE</a> está en el Top 20 de forma más o menos consistente y es el
-  <a href='http://redmonk.com/sogrady/2014/01/22/language-rankings-1-14/'>7º
-    más popular según RedMonk</a> (que mide proyectos nuevos en GitHub
-    y preguntas en StackOverflow), justo por debajo del C++. Y que
-  tiene una popularidad creciente en el área de <em>devops</em>, es
-  decir, del área de sistemas para apoyar al desarrollo. En todo caso,
-    <a href='http://kakubei.blogspot.com.es/2013/04/reasons-to-learn-ruby.html'>hay
-      muchas razones</a>, incluyendo que
-  es un lenguaje más a conocer para añadir a una panoplia de herramientas.</p> 
-
-<h2><a name="2:instala">Instalando Ruby </a> <a href="#2:instala" style="font-size:small">#</a></h2>
-
-<p>Desde Ubuntu, Guadalinex o
-    Debian, haz</p>
- <code>sudo apt-get install ruby irb rubygems rdoc</code>.
-
-<p>También puedes instalar
-  el <a href='https://www.ruby-lang.org/es/downloads/'>Ruby Version
-  Manager</a>, que te permite trabajar con diferentes versiones de
-  Ruby a la vez:
-  <code class='ejemplo'>curl -L https://get.rvm.io | bash -s stable  --ruby</code>
-y que se instala directamente como una aplicación de usuario. Trabajar
-  de esta forma permite uniformizar las versiones en un equipo de
-  trabajo y por supuesto actualizar fácilmente el intérprete
-  instalado. Este programa lanza un guión del intérprete de comandos
-  y, en algunos casos, te podrá pedir la clave de superusuario,
-  aunque la instalación final se hace en tu
-  espacio <code>$HOME</code>. Previamente habrás tenido que
-  instalar <code>curl</code>, aunque está instalado en las distros
-  más habituales; si no encuentra una distribución binaria descargará
-  y compilará una nueva distro, por lo que también habrá que tener
-  las correspondientes herramientas instaladas (principalmente
-  compiladores; una vez más, en la mayoría de los casos ya lo
-  están). En <a href='https://rvm.io/rvm/install'>esta página da
-    diferentes opciones para instalar RVM con/sin Rails y otra serie
-    de opcioens</a>.</p>
-
-  <p>Para usar <a href='https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm'>directamente en el intérprete donde estás RVM</a>, un par de comandos más</p>:
-  <code class='ejemplo'>bash$ source ~/.rvm/scripts/rvm
-rvm requirements</code>
-  <p>Y, por supuesto, </p>
-  <code class='ejemplo>rvm install ruby</code>
-  <p>para instalar la última versión del intérprete de Ruby, y posteriormente</p>
-  <code class='ejemplo'>rvm use ruby --default</code>
-<p>para usarlo.  Casi todos los manuales hoy en día aconsejan trabajar con RVM en vez de la versión que viene con la distribución.</p>
-
-  <p>También hay otra forma de trabajar con entornos
-  virtuales: <a href='http://gorails.com/setup/ubuntu/13.10'><code>rbenv</code></a>. Los
-  pasos seguidos son similares: se instala el entorno, se descarga y
-    construye el intérprete, y posteriormente se selecciona el que
-    deseemos. En vez de <code>curl</code>, <code>rbenv</code>
-  usa <code>git</code> para descargarse (cuyo uso también aconsejamos
-  vivamente). </p>
-
-<p>En cuanto al intérprete de Ruby que se puede instalar, hay muchas
-  opciones; hay varias implementaciones de Ruby, aunque la más
-  popular es la <em>oficial</em>, la de Matz (llamada a veces
-  MRI). Hay, sin embargo, otras como JRuby (dentro de la máquina
-  virtual Java) o
-  incluso <a href="http://en.wikipedia.org/wiki/Rubinius">Rubinius</a>
-  una versión que trata de implementar la mayor parte de Ruby usando
-  el propio lenguaje y diseñada para que sea concurrente. En
-  tu ordenador puede que tengas una u otra, aunque también te puedes
-  instalar <a href="http://en.wikipedia.org/wiki/Ruby_%28programming_language%29#Implementations">cualquier
-    otra</a>.  Aconsejamos que se use la oficial para la distribución
-  o bien, como se ha hecho arriba, se instale <code>rbenv</code>
-  o <code>rvm</code>. </p>
-
-<h2><a name="1:primer">Primer programa </a> <a href="#1:primer" style="font-size:small">#</a></h2>
-
-
-<p>Para programar en Ruby necesitas el editor y el intérprete de Ruby propiamente
-  dicho. Descárgatelo e instálalo, aunque te vendrá bien también
-  bajarte <code>irb</code>, un intérprete interactivo que te permitirá
-  probar cosas sobre la marcha (viene incluido con los entornos virtuales). Servidor usa Emacs como editor, pero
-  cualquier otra cosa también servirá, incluso Notepad. Ahora, si
-  quieres ir un poco más allá, te puedes
-  descargar <a href="http://www.ibm.com/developerworks/opensource/library/os-rubyeclipse/">
-    un plugin para Eclipse</a> o
-  el <a href="http://homepage2.nifty.com/sakazuki/rde_en/">RDE, sólo
-    para Windows</a>. </p>
-
-<p>Ruby es un intérprete, así que no se "ejecuta" desde el menú. El
-  ciclo es el habitual en programas para lenguajes interpretados: se
-  escribe y se guarda el programa, nos vamos al directorio donde lo
-  hemos guardado, si estamos en Linux (o algún otro sabor de Unix como
-  el Mac) lo hacemos ejecutable
-  con <code>chmod +x</code>, y lo ejecutamos. Pero todavía no podemos
-  ejecutar nada, porque no hemos visto ningún programa, así que vamos
-  con el primero.</p>
-
-<code class="ejemplo"><span class="hl slc">#!/usr/bin/ruby</span>
-puts <span class="hl str">"Esto es jauja"</span></code>
-
-<p>La primera línea es la habitual en lenguajes interpretados: le dice
-  al intérprete de órdenes de Linux (y al servidor Apache en Windows,
-  también) dónde tiene que buscar el intérprete; así que habrá que
-  comprobar que efectivamente se encuentra allí
-  escribiendo <code>which ruby</code> (sí, en Linux, así que ya no lo
-  voy a decir más y asumid directamente que cualquier cosa que diga es
-  para Linux a no ser que se diga lo contrario).</p>
-
-<p>Si usamos RVM (lo que aconsejamos vivamente) el programa anterior
-  se convertiría en </p>
-<code class="ejemplo"><span class="hl slc">#!/usr/bin/env ruby</span>
-puts <span class="hl str">"Esto es jauja"</span></code>
-
-  <p>En el que hemos cambiado la primera línea por otra
-  que <em>busca</em> en el camino de ejecución un programa que
-  corresponda a Ruby; si RVM está bien configurado, el primero que
-    aparecerá será la instalación que se haya hecho. En todo caso,
-  esta segunda forma es más aconsejable porque es independiente del
-  lugar donde esté instalado Ruby, basta con que esté en el camino de ejecución</p>
-
-  <p>La siguiente línea no vacía ya sí está escrita en el lenguaje Ruby (aunque
-  usa la misma orden que C, <code>put
-  string</code>), pero tampoco es que extrañe demasiado. La cadena va
-  entre comillas, se usa el cambio de línea para acabar la sentencia,
-    y ya está.</p>
-
-<p>Para ejecutarlo se guarda y se hace lo que se ha dicho antes, no
-  voy a repetirlo. Y el resultado será el esperado. También pasará lo
-  mismo si lo hacemos desde <code>irb</code>, el intérprete
-  interactivo (que también se instala con RVM):</p>
-<code class="ejemplo">[jmerelo@leonard ruby-para-impacientes]$ <span class="user">irb</span>
-pirb(main):001:0&gt; <span class="user">puts "esto es jauja"</span>
-esto es jauja
-=&gt; nil</code>
-
-<h2><a name="2:Objetos">Ruby, un lenguaje orientado a objetos </a> <a href="#2:Objetos" style="font-size:small">#</a></h2>
-<div class="aclara" style="width:300"><h3>Cuidado con el copy/paste
-    para programas en Ruby</h3>
-
-<p>Como Ruby usa la indentación mediante tabuladores para indicar
-  bloques, los copia/pega de las páginas web no tienen por qué
-  funcionar bien. Es mejor descargar los programas enlazados pulsando
-  con el botón de la derecha y <em>salvar como</em> o descargarlos del
-  directorio en GitHub</p>
-
 </div>
-
-<p>Pero Ruby es un lenguaje orientado a objetos, o más bien empotrado
-  de objetos: todo es un objeto en Ruby. Así que lo anterior (y algo más) podríamos
-  escribirlo <a href='code/jauja-center.rb'>de la forma
-  siguiente</a>.</p>
-
-<code class="ejemplo">puts <span class="hl str">"--"</span> <span class="hl sym">&lt;&lt;</span> <span class="hl str">"Esto es jauja"</span><span class="hl sym">.</span><span class="hl kwd">center</span><span class="hl sym">(</span><span class="hl num">20</span><span class="hl sym">) &lt;&lt;</span> <span class="hl str">"--"</span></code>
-
-  <p>Lo que consigue este programa es escribir una cadena centrada en
-  una línea de 20 caracteres y rodeada por dos guiones
-  (<code>--</code>). <code>&lt;&lt;</code> es el operador de 
- concatenación, que pega una cadena a la siguiente. Pero la 
- parte orientada a objetos está alrededor del 
-    <code>.center</code> es un método de la 
- clase <a href="http://ruby-doc.org/core/classes/String.html">String</a>, 
- pero como todo es un objeto en Ruby, no hace falta que lo 
- declaremos explícitamente, ya es un objeto de por sí, por lo que
- podemos aplicarle los métodos correspondientes, tales como
- ese. Pasándole el argumento 20, centra la cadena en un espacio
- equivalente a 20
-    caracteres:</p>
-<code class="ejemplo">usuario@usuario-desktop:~/code$ <span class="user">./jauja-center.rb </span>
---   Esto es jauja    --
-</code>
-
-<p>También podíamos haber creado el objeto explícitamente, pero
-  hubiera sido mucho más clásico:</p>
-
-<code class="ejemplo">jauja <span class="hl sym">=</span> String<span class="hl sym">::</span><span class="hl kwd">new</span><span class="hl sym">(</span> <span class="hl str">"Esto es jauja"</span> <span class="hl sym">)</span>
-puts <span class="hl str">"--"</span> <span class="hl sym">&lt;&lt;</span> jauja<span class="hl sym">.</span><span class="hl kwd">center</span><span class="hl sym">(</span><span class="hl num">20</span><span class="hl sym">) &lt;&lt;</span> <span class="hl str">"--"</span>
-</code>
-
-  <p>En la primera línea, en la que definimos una variable llamada <code>jauja</code> vemos un par de cosas: como en otros lenguajes,
-las variables en Ruby no tienen ningún  carácter
-adicional (en realidad se verán más adelante algunos caracteres, que
-    se usan principalmente para resolución de ámbito). Sólo el nombre
-de la variable, lo que tiene sentido, porque hace que uno
-tenga que escribir menos. Por otro lado, <code>String</code> es una
-clase, y además una clase estándar, por lo que no hay que decirle al
-programa que la incluya ni nada. El método <code>new</code> es un
-método de clase, con lo que la sintaxis para llamarlo, a diferencia del método de un
-objeto, es de cuatro puntos (dos puntos dobles). El contenido de la
-variable sigue siendo un objeto, así que se usa de la misma forma que
-antes. </p>
-
-<p>El resto de los tipos de datos se define también de la forma más
-lógica; Ruby trabaja bajo el principio de la mínima sorpresa (lo que
-muchas veces provoca sorpresa viniendo de otros lenguajes), o más bien
-de la máxima coherencia: una vez aprendida parte del lenguaje, el
-  resto es más o menos igual. Por ejemplo, <a href='code/matriz.rb'>las matrices</a>:
-<code class="ejemplo">matriz <span class="hl sym">= [</span><span class="hl str">'esto'</span><span class="hl sym">,</span><span class="hl str">'es'</span><span class="hl sym">,</span><span class="hl num">1</span><span class="hl sym">,</span><span class="hl str">'matriz'</span><span class="hl sym">]</span>
-puts matriz<span class="hl sym">.</span>join <span class="hl sym">&lt;&lt;</span> <span class="hl str">" "</span> <span class="hl sym">&lt;&lt;</span> matriz<span class="hl sym">.</span><span class="hl kwd">join</span><span class="hl sym">(</span><span class="hl str">"-"</span><span class="hl sym">)</span>
-</code>
-Como ocurre en
-otros <a href='http://stackoverflow.com/questions/125367/dynamic-type-languages-versus-static-type-languages'>lenguajes
-  de tipificado dinámicos como el Perl</a> cada elemento de una matriz
-puede tener un tipo diferente: una matriz puede contener números enteros,
-cadenas e incluso otras matrices, y desde su creación son objetos de
-pleno derecho, pudiéndosele aplicar métodos como <code>join</code> que
-une todos los elementos de la matriz, con o sin algún carácter de por
-medio. Este pequeño programa imprimirá:
-<code class="ejemplo">usuario@usuario-desktop:~/ruby-para-impacientes$ <span class="user">code/matriz.rb </span>
-estoes1matriz esto-es-1-matriz</code>
-como, imagino, era de esperar. </p>
-
-<p>No son los únicos tipos de matrices: las matrices asociativas son
-  aquellas que usan una clave para acceder a cada uno de los elementos
-  (en vez de hacerlo en secuencia), sumamente útiles para evitar la
-  distribución de la información de una estructura de datos por
-  múltiples matrices y su <a href='code/sonido.rb'>acceso fácil usando una clave</a></p>
-<code class="ejemplo">sonido_de <span class="hl sym">= { :</span>vaca <span class="hl sym">=&gt;</span> <span class="hl str">'muuu'</span><span class="hl sym">,</span>
-	  <span class="hl sym">:</span>buho <span class="hl sym">=&gt;</span> <span class="hl str">'uuu'</span><span class="hl sym">,</span>
-	  <span class="hl sym">:</span>caballo <span class="hl sym">=&gt;</span> <span class="hl str">'iiiii'</span> <span class="hl sym">}</span>
-puts sonido_de<span class="hl sym">.</span>inspect
-</code>
-
-<p>Que, aparte de introducir las llaves (para claves... ¿lo ves como se
-	  trata de no sorprender?) pone unos dos puntitos delante de
-	  las mismas que la verdad es que sí sorprenden. Y es porque se
-	  trata de cadenas un poco especiales, denominadas
-	  <em>símbolos</em>. Los símbolos en Ruby son como cadenas con las que
-	  no se va hacer nada de lo que se suele hacer con las mismas:
-	  ni partirlas, ni añadirles nada, ni quitarles nada. Unas
-	  cadenas constantes, más o menos, que no es otra cosa lo que
-necesitamos en una variable asociativa (porque las claves, una vez
-	  establecidas, no se cambian, si acaso se añaden claves nuevas),
-	  denominada <a href="http://ruby-doc.org/core/classes/Hash.html">Hash</a>
-	  en Ruby. Por supuesto, se puede usar una cadena <a href='code/asociativa-normal.rb'>normal y
-	    corriente como clave</a>:
-<code class="ejemplo">precio_de <span class="hl sym">= {</span> <span class="hl str">"pipas"</span> <span class="hl sym">=&gt;</span> <span class="hl str">'bajo'</span><span class="hl sym">,</span>
-	  <span class="hl str">"coche"</span> <span class="hl sym">=&gt;</span> <span class="hl str">'depende'</span><span class="hl sym">,</span>
-	  <span class="hl str">"plan E"</span> <span class="hl sym">=&gt;</span> <span class="hl str">'exagerado'</span> <span class="hl sym">}</span>
-puts precio_de<span class="hl sym">.</span>to_s</code>
-que al ejecutarse, por usar <code>to_s</code> para convertir a una
-	  cadena la matriz asociativa en vez del inspect anterior no
-se ve nada, pero es otra forma de hacer las cosas.</p>
-
-<p>Ruby, aparte de tener tipificación dinámica, también tiene
-  tipificación fuerte. Es decir, una vez que se ha establecido el tipo
-  de una variable sólo se pueden hacer las operaciones que permita la
-  clase. </p>
-  <code class='ejemplo'>irb(main):015:0><span class='user'> bar='hola k ase'</span>
-=> "hola k ase"
-irb(main):016:0><span class='user'>  bar+3</span>
-TypeError: can't convert Fixnum into String
-	from (irb):16:in `+'
-	from (irb):16
-	from /usr/bin/irb:12:in `&lt;main>'
-irb(main):017:0><span class='user'>  bar=3</span>
-=> 3
-irb(main):018:0><span class='user'> bar+3 </span>
-=> 6</code>
-
-  <p>En el ejemplo anterior primero definimos <code>bar</code> como
-    una cadena, lo que fija su tipo a <code>String</code>, por lo que
-    no podemos usar la operación de suma y obtenemos el error que se
-    indica (no se puede convertir <code>Fixnum</code>
-    en  <code>String</code>). Sin embargo, usamos la misma variable
-    para asignarle un número y dinámicamente se le asigna ese tipo o
-    clase, por lo que ya podemos usarlo para esa operación</p>
-
-<h2><a name="1:es">Entrada y Salida. Y, de camino, bucles. </a> <a href="#1:es" style="font-size:small">#</a></h2>
+ 
 
 
-<p>Tratándose de un lenguaje orientado a objetos, habrá que buscar la
-  clase para abrir y cerrar ficheros, que <a href='code/fichero.rb'>se llama en un alarde de
-    originalidad <code>File</code> (recordemos, mínima sorpresa)</a>.
-<code class="ejemplo">fh <span class="hl sym">=</span> File<span class="hl sym">::</span><span class="hl kwd">new</span><span class="hl sym">(</span> <span class="hl kwc">ARGV</span><span class="hl sym">[</span><span class="hl num">0</span><span class="hl sym">] )</span>
-<span class="hl kwa">while</span> <span class="hl sym">(</span>line <span class="hl sym">=</span> fh<span class="hl sym">.</span>gets <span class="hl sym">)</span>
-      nombre<span class="hl sym">,</span> apellidos  <span class="hl sym">=</span> line<span class="hl sym">.</span><span class="hl kwd">split</span><span class="hl sym">(</span><span class="hl str">','</span><span class="hl sym">)</span>
-      puts <span class="hl str">"* Nombre #{nombre}</span><span class="hl esc">\n\t</span><span class="hl str">apellidos #{apellidos}"</span>
-<span class="hl kwa">end</span></code>
-En este caso, tampoco es sorprendente la matriz que se usa para
-acceder a la línea de comandos: <code>ARGV</code>, igual que en C (pero en
-mayúsculas) o en Perl (pero sin dólares). Ya puestos, introducimos
-también una estructura de control: el bucle <code>while</code> que
-va leyendo línea a línea con <code>gets</code> (lo contrario
-que <code>puts</code>, que es para escribir). El cuerpo del bucle no
-usa llaves, sólo la indentación y la palabra <code>end</code> para indicar el
-final. </p>
-
-  <p>Fijaros también en una cosa curiosa: el <code>=</code> de la primera línea
-  tiene a la izquiera y a la derecha una matriz: dos variables a las
-  que se le asigna lo que queda al partir (<code>split</code>) la línea del
-  tipo <code>nombre, apellidos</code> por la coma que lo
-  divide. Simplemente se ponen a la izquierda las variables a las que
-  van a ir a parar los diferentes elementos de la matriz. Y en la
-  línea siguiente se imprime la salida, interpolando las cadenas
-  usando algo para distinguirlas: <code>#{}</code>. Como las variables
-  no tienen ningún símbolo delante, hace falta eso al menos para saber
-  que se trata de variables, y no de parte de la cadena. El
-  resultado es el esperado:
-<code class="ejemplo">$ <span class="user"> ruby code/fichero.rb code/nombres.txt </span>
-* Nombre Ginés
-	apellidos  Ibn Hassan Rodríguez
-* Nombre Sergei
-	apellidos  Ben Ayoun
-* Nombre Malika
-	apellidos  Maliki
-* Nombre Juan
-	apellidos  Gómez Gómez
-</code>
-al menos sobre el fichero
-</p><pre>Ginés, Ibn Hassan Rodríguez
-Sergei, Ben Ayoun
-Malika, Maliki
-Juan, Gómez Gómez</pre>
-<p></p>
-
-<p>Las clases están organizadas jerárquicamente en espacios de
-  nombres. <code>Net</code>, por ejemplo, agrupa diferentes funciones
-  relacionadas con la red: web , FTP, y todas esas cosas; dentro de
-  esa jerarquía, los descendientes se separan con <code>::</code>,
-  igual que en
-  Perl. <a href="http://augustl.com/blog/2010/ruby_net_http_cheat_sheet/">Net::HTTP</a>
-  serviría para leer cosas de la web. Pero no forma parte del núcleo o
-  <em>core</em>, así que tendremos que <a href='code/trayendo.rb'>importarla explícitamente con
-    <code>require</code></a>:
-<code class="ejemplo"><span class="hl kwa">require</span> <span class="hl str">'net/http'</span>
-
-Net<span class="hl sym">::</span>HTTP<span class="hl sym">.</span>get_print  <span class="hl str">'osl.ugr.es'</span><span class="hl sym">,</span> <span class="hl str">'/'</span>
-</code>
-En <code>require</code> cambia un poco la sintaxis: se separan las partes de la
-librería con <code>/</code> y se pone todo en minúsculas. <code>require</code>
-importa el código, pero no los identificadores; por eso para usar
-alguna función del módulo hay que decir todo el nombre de la misma:
-nombre de la clase <code> nombre_del_método</code>. <code>get_print</code> es un método
-  de clase, y recibe como argumentos el nombre del servidor (el HTTP
-  va de soi) y la dirección dentro de ese servidor, en este caso el
-  directorio raíz. Al ejecutarlo nos dará de resultado un mogollón de
-  texto, todo lo que haya en la página. De camino, conviene fijarse
-  que aquí nos hemos ahorrado unos cuantos paréntesis, lo que,
-  sinceramente, me ha sorprendido.</p>
-
-<p>Juntando todo lo anterior, y añadiendo alguna cosilla más de
-  nuestra cosecha, podemos <a href='code/curl.rb'>bajarnos una página web y
-    meterla en un fichero</a></p>
-<code class="ejemplo"><span class="hl kwa">require</span> <span class="hl str">'net/http'</span>
-
-url <span class="hl sym">=</span> <span class="hl kwc">ARGV</span><span class="hl sym">[</span><span class="hl num">0</span><span class="hl sym">]</span>
-respuesta <span class="hl sym">=</span> Net<span class="hl sym">::</span>HTTP<span class="hl sym">.</span>get  url<span class="hl sym">,</span> <span class="hl str">'/'</span>
-fname <span class="hl sym">=</span> url <span class="hl sym">+</span> <span class="hl str">".html"</span>
-<span class="hl kwa">if</span> <span class="hl sym">(</span> File<span class="hl sym">.</span>writable<span class="hl sym">?(</span>fname<span class="hl sym">) )</span>
-   salida <span class="hl sym">=</span> File<span class="hl sym">.</span>new fname<span class="hl sym">,</span> <span class="hl str">"w"</span>
-   salida<span class="hl sym">.</span><span class="hl kwd">puts</span><span class="hl sym">(</span> respuesta <span class="hl sym">)</span>
-<span class="hl kwa">else</span>
-   <span class="hl kwd">puts</span><span class="hl sym">(</span><span class="hl str">'No puedo escribir en '</span> <span class="hl sym">+</span>fname<span class="hl sym">)</span>
-<span class="hl kwa">end</span>
-</code>
-<p>Nuestra cosecha incluye una interrogación y un <code>if</code>, que no
-  habíamos visto antes. La interrogación se pone en los métodos que
-  devuelven un valor lógico, verdadero o falso (valores que tienen un
-  tratamiento diferente en Ruby y en otros lenguajes: un valor lógico
-  es un valor lógico, no un 0 o una cadena nula). En este caso, si se
-  trata o no de un fichero sobre el que tengamos derechos de escritura
-  (en lo que, al parecer, es un poco peculiar este Ruby). El bloque
-  <code>if</code> termina en <code>end</code>, como antes el bucle. Además, hemos usado "w"
-  como segundo argumento de <code>File.new</code> para abrirlo para
-  escritura. Como se ve, no hace falta cerrarlo. Pa qué, si ya sabe
-  hacerlo el ordenador. </p>
-
-<h2><a name="1:bloques">Bloques </a> <a href="#1:bloques" style="font-size:small">#</a></h2>
-
-<p>Después de las variables uno de los conceptos importantes en Ruby
-  son los bloques. Un bloque es una secuencia de código que define un ámbito léxico, es decir que puede tener sus
-  propias variables, y en Ruby se denota por
-  llaves <code>{}</code> o por <code>do</code> - <code>done</code>. Se usa, por ejemplo, para bucles tales como los siguientes.<p></p>
-<code class="ejemplo">host <span class="hl sym">=</span> <span class="hl kwc">ARGV</span><span class="hl sym">[</span><span class="hl num">0</span><span class="hl sym">]</span>
-partes <span class="hl sym">=</span> host<span class="hl sym">.</span><span class="hl kwd">split</span><span class="hl sym">(</span><span class="hl str">"."</span><span class="hl sym">)</span>
-partes<span class="hl sym">.</span>each <span class="hl kwa">do</span> <span class="hl sym">|</span>p<span class="hl sym">|</span>
-  puts <span class="hl str">"* #{p}"</span>
-<span class="hl kwa">end</span>
-</code>
-  <p>En <a href='code/host.rb'>este mini-programa</a> le pasamos un nombre de servidor en internet 
-(del tipo subdominio.dominio.tld) y nos da cada una de sus partes, que 
-se guardan precisamente en una variable que se llama así. Pero el truco 
-está en la tercera línea: <code>partes.each</code> es una función que recibe un bloque como argumento. También lo podríamos expresar de la forma siguiente:
-<code class="ejemplo">partes <span class="hl sym">=</span> host<span class="hl sym">.</span><span class="hl kwd">split</span><span class="hl sym">(</span><span class="hl str">"."</span><span class="hl sym">)</span>
-partes<span class="hl sym">.</span>each <span class="hl sym">{ |</span>p<span class="hl sym">|</span>
-  puts <span class="hl str">"* #{p}"</span>
-<span class="hl sym">}</span>
-</code>
-y sería exactamente lo mismo (salvo la precedencia, pero eso no nos importa ahora). </p>
-
-<p>Los bloques tienen todos la misma estructura: al principio se
-  declara una variable, que será la variable que irá tomando los
-  valores que reciba de su función uno por uno. En este caso la hemos
-  llamado <code>p</code>, pero es un nombre arbitrario, porque estamos haciendo
-  una declaración. Dentro ya del bloque metemos el código que
-  consideremos necesario, y lo finalizamos con llaves o end,
-  dependiendo de cómo lo hayamos comenzado</p>
-
-<p>Lo que ocurre con los bloques en Ruby es que tienen entidad
-  propia. Son como funciones anónimas, y de hecho se pueden usar como
-  tales; además, como todo en Ruby, son objetos, o sea que podemos
-  crearlos y pasarlos por ahí como queramos. 
-<code class="ejemplo">prefijos <span class="hl sym">= %</span><span class="hl kwd">w</span><span class="hl sym">(</span> pre post ante <span class="hl kwa">super</span> macro mega<span class="hl sym">)</span>
-prefijadores <span class="hl sym">=</span> Hash<span class="hl sym">.</span>new
-prefijos<span class="hl sym">.</span>each <span class="hl sym">{ |</span>p<span class="hl sym">|</span>
-  prefijadores<span class="hl sym">[</span>p<span class="hl sym">] =</span> lambda <span class="hl sym">{ |</span>post<span class="hl sym">|</span> <span class="hl kwa">return</span> <span class="hl str">"#{p}#{post}"</span><span class="hl sym">;}</span>
-<span class="hl sym">}</span>
-
-puts prefijadores<span class="hl sym">[</span><span class="hl str">'macro'</span><span class="hl sym">].</span><span class="hl kwd">call</span><span class="hl sym">(</span> <span class="hl str">'objetivo'</span> <span class="hl sym">)</span>
-puts prefijadores<span class="hl sym">[</span><span class="hl str">'super'</span><span class="hl sym">].</span><span class="hl kwd">call</span><span class="hl sym">(</span> <span class="hl str">'chanchi'</span> <span class="hl sym">)</span>
-puts prefijadores<span class="hl sym">[</span><span class="hl str">'mega'</span><span class="hl sym">].</span><span class="hl kwd">call</span><span class="hl sym">(</span> <span class="hl str">'chuli'</span> <span class="hl sym">)</span>
-</code>
-En este ejemplo hemos empezado definiendo una matriz de forma
-abreviada: usando <code>%w</code> para ahorrarnos comas y comillas, y
-hemos seguido creando un <code>Hash</code> (matriz asociativa) donde vamos a
-guardar todas las funciones. Recorriendo el array creado y usando
-<code>lambda</code> creamos una función que tiene una parte fija, <code>p</code> que recibe
-del bucle, y una parte variable, <code>post</code>, que es el argumento que
-recibirá cuando se llame, tal como se hace abajo usando <code>call</code>
-(recordad que es un objeto, y para ejecutar esa función hay que llamar
-al método <code>call</code> de ese objeto). La
-función <code>prefijadores['macro']</code> se comportará de la misma
-forma que si la hubiéramos definido así
-<code class="ejemplo"><span class="hl kwa">def</span> <span class="hl kwd">prefijador</span><span class="hl sym">(</span> post <span class="hl sym">)</span>
-  <span class="hl str">"macro#{post}"</span><span class="hl sym">;</span>
-<span class="hl kwa">end</span>
-
-puts <span class="hl kwd">prefijador</span><span class="hl sym">(</span><span class="hl str">'micro'</span><span class="hl sym">);</span>
-</code>
-la única diferencia es que en este caso no hace falta usar <code>call</code> para
-llamar a la función: se puede usar directamente el nombre de la
-misma. De camino, vemos como se definen funciones en ruby: usando
-también <code>def</code>. Igual que antes, salvo que ahora damos un nombre al
-bloque, lo que le da más derechos, al parecer.</p>
-
-<h2><a name="1:cpan">Instalando nuevos módulos </a> <a href="#1:cpan" style="font-size:small">#</a></h2>
-
-<p>Qué sería de cualquier lenguaje si tuviéramos que conformarnos con
-  lo que nos da, y no pudiéramos instalar cosas nuevas... comenzó
-  LaTeX con CTAN, luego siguió Perl con CPAN, y Ruby tiene su
-  colección de gemas para poder bajártelas cómodamente. En la mayor
-  parte de las distribuciones incluidas hoy en día, o en cualquier
-  caso a partir de la 1.9, es parte del mismo paquete que Ruby, así
-  que no hace falta descargárselo aparte. Si no es el caso, lo mejor
-  es usar el entorno RVM como se ha explicado anteriormente.</p>
-
-<p>Aparte de gem, hay que instalarse alguna cosa más, porque muchos
-  módulos en ruby necesitan herramientas de construcción
-  adicionales. En concreto, la versión <code>-dev</code> del paquete
-  Ruby que tengamos instalado. Por ejemplo, en Ubuntu habría que
-  escribir 
-  <code class="ejemplo">sudo apt-get install ruby1.8-dev</code>
-(o algo similar, dependiendo de la versión de Ubuntu que tengamos instalada). No siempre es necesario, pero si te da un error algún módulo típico,
-  posiblemente sea por eso; si tenemos alguno de los entornos virtuales también es posible que haya que realizar alguna instalación adicional para los módulos.</p>
-
-<p>Una vez instalado todo eso, no hay más que usarlo. Empezamos por
-  buscar algo que queramos instalar:</p>
-<code class="ejemplo">jmerelo@sheldon:~/public_html/tutoriales/ruby-para-impacientes$
-  <span class="user">gem search mysql</span>
-
-*** LOCAL GEMS ***
-</code>
-<p>Joeves, no devuelve nada. Pero claro, es que busca en la colección
-  local de gemas. Habrá que buscar en la remota:</p>
-<code class="ejemplo">
-jmerelo@sheldon:~/public_html/tutoriales/ruby-para-impacientes$ <span class="user">gem search --remote mysql</span>
-
-*** REMOTE GEMS ***
-
-activerecord-jdbcmysql-adapter (0.9.6)
-activerecord-mysql-adapter-flags (0.0.3)
-dbd-mysql (0.4.4)
-do_mysql (0.10.1)
-...
-</code>
-<p>Y así hasta un mogollón de cosas. Tendremos un listado de todas las
-  disponibles, y todas las versiones. Vamos a instalarnos la tercera;
-  si queremos que esté disponible para todos los usuarios tendremos
-  que lanzar la orden con privilegios de administrador:</p>
-<code class="ejemplo">jmerelo@sheldon:~/ruby-para-impacientes$ <span class="user">sudo gem install ruby-mysql</span>
-Successfully installed ruby-mysql-2.9.2
-1 gem installed
-Installing ri documentation for ruby-mysql-2.9.2...
-Installing RDoc documentation for ruby-mysql-2.9.2...
-[...]
-</code>
-<p>En algunos módulos puede que dé error, porque falte alguna
-  dependencia que haya que instalar desde el sistema operativo; en ese
-  caso, es conveniente instalar el paquete correspondiente, en vez de
-  hacerlo desde <code>gem</code>. Si no es la ultimísima versión luego se puede
-  actualizar con gem update. Por ejemplo, un paquete de mysql se puede
-  instalar con <code>sudo apt-get install libdbd-mysql-ruby</code>;
-  posteriormente, al hacer <code>gem update</code> se actualizará
-  alguna de las librerías dependientes que se han instalado con el
-  paquete (en mi caso, sólo una denominada <code>deprecated</code>)</p>
+<h2 id="g0.1">Un poco de historia siempre viene bien. #</h2>
 
 
-<h2><a name="1:hpricot">6 Rascando HTML: hpricot </a> <a href="#1:hpricot" style="font-size:small">#</a></h2>
+ 
+<p>Historia</p>
+
+<h2 id="g0.2">Como no, " El zen de Git &nbsp;#</h2>
+
+<p>El zen de git.  #</p>
 
 
-<p>Hay verdaderas virguerías entre los paquetes gem, pero uno de los
-  más útiles para los que nos dedicamos
-  a <acronym name="scraping">rascar HTML</acronym>
-  es <a rhef="http://hpricot.com/">hpricot</a>, un analizador
-  <em>liberal</em> de HTML que permite extraer información de las páginas
-  muy fácilmente. Lo instalamos con gem (<code>sudo gem install
-    hpricot</code>) y podemos <a href='code/osl-titulares.rb'>empezar a usarlo</a></p>
-<code class="ejemplo"><span class="hl kwa">require</span> <span class="hl str">'rubygems'</span>
-<span class="hl kwa">require</span> <span class="hl str">'hpricot'</span>
-<span class="hl kwa">require</span> <span class="hl str">'open-uri'</span>
+<p>
+<br>
+</p>
 
-osl <span class="hl sym">=</span>  <span class="hl kwd">Hpricot</span><span class="hl sym">(</span><span class="hl kwd">open</span><span class="hl sym">(</span><span class="hl str">"http://osl.ugr.es/"</span><span class="hl sym">))</span>
-osl<span class="hl sym">.</span><span class="hl kwd">search</span><span class="hl sym">(</span><span class="hl str">"//h2[@class='entry-title']"</span><span class="hl sym">).</span>each <span class="hl sym">{ |</span>h2<span class="hl sym">|</span>
-  this_h2 <span class="hl sym">=</span> <span class="hl kwd">Hpricot</span><span class="hl sym">(</span> h2<span class="hl sym">.</span>to_s <span class="hl sym">)</span>
-  link <span class="hl sym">=</span> this_h2<span class="hl sym">.</span><span class="hl kwd">search</span><span class="hl sym">(</span><span class="hl str">"a[@href]"</span><span class="hl sym">).</span>inner_html
-  text <span class="hl sym">=</span> this_h2<span class="hl sym">.</span><span class="hl kwd">at</span><span class="hl sym">(</span><span class="hl str">"a"</span><span class="hl sym">).</span>inner_html
-  puts <span class="hl str">"#{link} =&gt; #{text}"</span>
-<span class="hl sym">}</span></code>
-<p>Hay que incluir unos cuantos módulos; a partir de ahí se trata de
-  usar expresiones XPath (hay que saber un poco de XML para esto, pero
-  es bastante lógico todo) y de usar <code>inner_html</code> para
-  extraer el interior de los elementos que vamos analizando, en este
-  caso los enlaces y títulos de los titulares del blog de
-  la <a href="http://osl.ugr.es/">OSL</a>. Por ejemplo, en este caso
-  le estamos diciendo que extraiga los elementos <code>h2</code> que, además,
-  tengan como atributo <code>class</code> <code>entry-title</code>; y lo estamos
-      haciendo pasándole un bloque con las cosas que tiene que hacer
-      cada vez que se encuentre con un elemento que cumpla esa
-      condición.  <p></p>
 
-<p>Por cierto, no es la única forma de hacer <em>scraping</em> con
-      Ruby: se <a href="http://muharem.wordpress.com/2007/09/04/scrape-the-web-with-ruby/">puede
-      usar también WWW::Mechanize</a>, una versión de la librería en Perl.</p>
+<h2 id="g0.3">Flujos de trabajo &nbsp;#</h2>
 
-<h2><a name="1:t1:biblio">7 Bibliografía </a> <a href="#1:t1:biblio" style="font-size:small">#</a></h2>
 
-<p>Como es de esperar, hay libros enteros gratuitos sobre
-    Ruby: <a href="http://ruby-doc.org/docs/ProgrammingRuby/">Programming
-      Ruby</a>, por ejemplo, pero el más curioso
-    es <a href="http://mislav.uniqpath.com/poignant-guide/">la guía
-      intensa de Why's a Ruby</a>, con cómics, vericuetos inefables,
-    pero que finalmente termina enseñando bastante. También tienes
-    este <a href="https://www.ruby-lang.org/en/documentation/quickstart/">tutorial
-      en 20 minutos</a>, y los libros que te aparecen a ambos lados
-    de este texto.</p>
+<p>Flujos de trabajo.</p>
 
-<p>Como seguramente conoces otro lenguaje de programación, prueba <a href="https://www.ruby-lang.org/es/documentation/ruby-from-other-languages/">Ruby
-	desde otros lenguajes</a>, con tutoriales en inglés y español
-      que explican cómo trabajar  con Ruby si se conoce Perl, o Java,
-	o Python.</p>
+<h2 id="g0.4">Contribuir en un proyecto.  #</h2>
 
-<p>En español se puede
-  mirar <a href="http://rubytutorial.wikidot.com/">este tutorial de
-  Ruby</a>, bastante completo,
-  o <a href="http://rubytutorial.wikidot.com/ruby-15-minutos">este
-  resumen</a> para aprender en sólo 15 minutos. También hay
-  traducciones de todos los libros anteriores, y si quieres meterte
-  más a fondo, tienes <a href="http://todoruby.blogspot.com/">este
-  blog</a> para
-  seguir. Esta <a href="http://www.demiurgo.org/charlas/ruby.pdf">presentación
-    también está bien</a>, aunque le falta detalle; es bastante
-  buena, en general, e instructiva. </p>
 
-<p>Cuando ya estés harto de
-  Ruby, <a href="http://www.maestrosdelweb.com/editorial/rubyonrails/">también
-    puedes aprender un poquico de Ruby on Rails</a>, ya puesto. </p>
+<p>Contribuir.</p>
+
+<h2 id="g0.5">Gestionar un proyecto &nbsp;#</h2>
+
+<p>Gestionar.</p>
+
+<h2 id="g0.6">Bibliografí­a.  #</h2>
+
+<p>Bibliografí­a.</p>
 
 
 
 <br clear="all">
 
-<div class="licencia">Este material está <a href="http://curso-sobre.berlios.de/gfdles/">disponible bajo los términos de la licencia GNU FDL</a>. </div>
+<div class="licencia" style="position: relative; z-index: 0; ">Este material está¡&nbsp;<a href="http://curso-sobre.berlios.de/gfdles/">disponible bajo los términos de la licencia GNU FDL</a>. </div>
 
-<address><a href="mailto:jj%20%28at%29%20merelo.net">Juan J. Merelo</a></address>
+<address><a href="mailto:renatolrr@gmail.com">Renato Ramirez</a></address>
   
 
-</body></html>
+
+
+</body>
+</html>
