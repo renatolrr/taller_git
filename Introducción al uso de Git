@@ -73,6 +73,13 @@ Añade ficheros al índice
 git add Nombre-del-Fichero
 git add Nombre-del-Directorio
 git add .
+
+Pasa del índice al HEAD:
+git commit
+git commit  -a -m “Comentario al commit”
+
+Reglas commit.
+
  
 Borra:
 git rm Nombre-del-Fichero
