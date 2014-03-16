@@ -1,0 +1,175 @@
+Taller de la Oficina de Software Libre:  Introducción al uso de Git
+ 
+El problema.
+ 
+“Al principio, sin sistemas de control de 
+versiones, todo era caos, desorden, 
+desconcierto y lágrimas.” @psicobyte_
+
+Historia
+
+Linux (1991-2002), parches y archivos.
+2002 DVCS BitKeeper.
+2005 Linus Torvalds.
+Velocidad 
+Diseño sencillo 
+Fuerte apoyo al desarrollo no lineal (miles de ramas paralelas) 
+Completamente distribuido 
+Capaz de manejar grandes proyectos (como el núcleo de Linux) de manera eficiente (velocidad y tamaño de los datos)
+ 
+¿Qué es Git?
+
+ Distributed Version Control Systems o DVCSs en inglés
+Git almacena la información como instantáneas del proyecto a lo largo del tiempo.
+Git es de línea de comandos
+(aunque hay clientes gráficos: Tortoise, gitg, 
+Giggle...)
+ 
+Los tres estados.
+
+1 Modificas una serie de archivos en tu directorio de trabajo.
+2 Preparas los archivos, añadiendolos a tu área de preparación. 
+3 Confirmas los cambios, lo que toma los archivos tal y como están en el área de preparación, y almacena esas instantáneas de manera permanente en tu directorio de Git.
+ 
+  
+Instalando Git
+ 
+Debian: # apt-get install git
+Archlinux: # pacman -S git
+Android: Playstore -> Buscar "git" -> Instalar -> Aceptar permisos
+En otros mundos:
+Windows: http://windows.github.com Clic aceptar...
+Mac: http://mac.github.com Clic aceptar...
+
+ 
+Configuración
+ 
+git config --global user.name "Psicobyte Sensei"
+git config --global user.email "psicobyte@gmail.com"
+git config --global color.ui true
+ 
+Claves ssh
+ 
+ssh-keygen
+ssh-copy-id Dirección-Del-Servidor
+ 
+Git día a día
+ 
+Inicia un repositorio
+git init
+ 
+¡Ayuda!
+git --help COMANDO
+git --help init
+ 
+Añade un origen remoto:
+git remote add origin URL
+ 
+O, directamente, clona un repositorio existente:
+git clone URL
+git clone Git@github.com:psicobyte/PiMondrian.Git
+ 
+Añade ficheros al índice
+git add Nombre-del-Fichero
+git add Nombre-del-Directorio
+git add .
+
+Pasa del índice al HEAD:
+git commit
+git commit  -a -m “Comentario al commit”
+
+Reglas commit.
+
+ 
+Borra:
+git rm Nombre-del-Fichero
+git rm --cached Nombre-del-Fichero
+ 
+Mueve (o renombra):
+git mv Nombre-del-Fichero Nuevo-Nombre
+ 
+¿Ya he hecho commit? ¿En qué rama? ¿Me falta 
+un add? ¿Qué está pasando?
+git status
+ 
+Sincronizando con repositorios remotos
+ 
+Envía cambios al servidor remoto
+git push origin master
+git push origin Nombre-De-La-Rama
+git push
+ 
+Añade un origen remoto:
+git remote add origin URL
+ 
+O, directamente, clona un repositorio existente:
+git clone URL
+ 
+Recibe cambios desde el servidor remoto
+git pull origin master
+git pull origin Nombre-De-La-Rama
+git pull
+ 
+¡Conflicto entre servidores!
+¿Qué hacemos?
+Git informa detalladamente del problema y 
+debemos arreglarlo nosotros mismos y hacer un 
+commit y un push.
+ 
+Usando ramas
+ 
+Crea una rama:
+git branch Nombre-De-La-Rama
+ 
+Nos movemos a una rama:
+git checkout Nombre-De-La-Rama
+ 
+Nos movemos a la rama principal:
+git checkout master
+ 
+Crea una rama y nos movemos a ella:
+git checkout -b Nombre-De-La-Rama
+ 
+¿En qué rama estoy?
+git branch
+ 
+Borra una rama:
+git branch -d Nombre-De-La-Rama
+ 
+Mezcla una rama con aquella en la que estés:
+git merge Nombre-De-La-Otra-Rama
+ 
+¡Conflicto entre ramas! ¿Qué hacemos?
+Git informa detalladamente del problema y 
+debemos arreglarlo nosotros mismos y hacer un 
+commit.
+
+Git en entornos distribuidos
+
+http://renatolrr.github.io/taller_git/
+
+Bibliografía
+
+Enlaces y referencias
+Git: http://Git-scm.com/
+GitHub: http://github.com/
+yryGit: http://try.github.io/
+
+Lo más importante: 
+
+El zen de git.
+http://www.psicobyte.com/info/descargas
+
+OSL de la UGR:
+ 
+http://osl.ugr.es/
+
+Renato Ramirez
+@renatolrr
+info@renatoramirez.com
+
+Licencia Creative Commons
+Reconocimiento – CompartirIgual (by-sa): Se permite el uso comercial de la obra y de las posibles obras derivadas, la distribución de las cuales se debe hacer con una licencia igual a la que regula la obra original. 
+
+
+
